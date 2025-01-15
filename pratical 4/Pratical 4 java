@@ -1,0 +1,409 @@
+class Pratical4
+{	
+	int getByte(int num)
+	{
+		int answer;
+		if(num>=0)
+		{
+		   int temp
+	            temp=num/128;
+		    if(temp%2==0)
+		    {
+			answer=num%128;
+		     }
+		     else
+		     {
+			answer=num%128-128;
+		     }
+		  }
+		 else
+		  {
+		     double temp;
+		     temp=Math.floor(num/128);
+			if(temp%2==0)
+		
+	                 {
+				answer=num%128;
+			}
+			else if(temp%2!=0 && num%256==-128)  // (temp%2!=0 && num%128==0)
+		
+	            	{
+				answer=-128;
+			}
+			else
+			{
+				answer=num%128+128;
+			}
+		}
+		return answer;
+	}
+	 
+_____________________________________________________________________________________________ 
+	
+	int getShort(int num)
+	{
+		int answer;
+		if(num>=0)
+		{
+		        int temp;
+			temp=num/32768;
+			if(temp%2==0)
+			{
+				answer=num%32768;
+			}
+			else
+			{
+				answer=num%32768-32768;
+			}
+		}
+		else
+		{
+                        double temp;		
+			temp=Math.floor(num/32768);
+			if(temp%2==0)
+			{
+				answer=num%32768;
+			}
+			else if(temp%2!=0 && num%65536==-32768)  // (temp%2!=0 && num%32768==0)
+			{
+				answer=-32768;
+			}
+			else
+			{
+				answer=num%32768+32768;
+			}
+		}
+		return answer;
+	}	
+	
+_________________________________________________________________________________________________________________
+
+        
+
+	int getNumber(int num,String type)
+        {
+        	int answer;
+        	if(type.compareToIgnoreCase("byte")==0)   //    if(type.equalsIgnoreCase("byte")==true)
+        	{
+        			if(num>=0)
+			        {
+			                int temp;
+					temp=num/128;
+					if(temp%2==0)
+					{
+						answer=num%128;
+					}
+					else
+					{
+						answer=num%128-128;
+					}
+			        }
+			        else
+			        {
+			                double temp;
+					temp=Math.floor(num/128);
+					if(temp%2==0)
+					{
+						answer=num%128;
+					}
+					else if(temp%2!=0 && num%256==-128)  // (temp%2!=0 && num%128==0)
+					{
+							answer=-128;
+					}
+					else
+					{
+						answer=num%128+128;
+					}
+				}
+		}
+		else if(type.compareToIgnoreCase("short")==0)
+ 		{
+						
+			        if(num>=0)
+			        {
+			                int temp;        
+					temp=num/32768;
+					if(temp%2==0)
+					{
+						answer=num%32768;
+					}
+					else
+					{
+						answer=num%32768-32768;
+					}
+				}
+				else
+				{
+				        double temp;
+					temp=Math.floor(num/32768);
+					if(temp%2==0)
+					{
+						answer=num%32768;
+					}
+				        else if(temp%2!=0 && num%65536==-32768)  // (temp%2!=0 && num%32768==0)
+				        {
+				        	answer=-32768;
+				        }
+				        else
+				        {
+				        	answer=num%32768+32768;
+				        }
+			         }
+	        }
+		else
+		{
+			System.out.println("Invalid type");
+			return -1;
+		}
+		return answer;
+	}
+
+__________________________________________________________________________________________________________________		
+					
+	// DECIMAL CONVERSION 
+	
+	String toxxSystem(String num,String xx)
+	{
+		String answer="";
+		Integer newNum=Integer.parseInt(num);  //string get converted to integer
+		if(xx.compareToIgnoreCase("b")==0 || xx.compareToIgnoreCase("0b")==0)
+		{
+			if(newNum>0)
+			{       
+				int rem=0,j;
+				int[] a= new int[20];
+			  	while(newNum>0)
+			  	{
+					a[rem]=newNum%2;
+					newNum=newNum/2;
+					rem++;
+				}
+				for(j=rem-1 ; j>=0; j--)
+				{
+					answer=answer+a[j];
+				}
+			}
+			else
+			{
+				System.out.println("Invalid");
+			}
+			return "0b"+answer;
+		}
+		else if(xx.compareToIgnoreCase("o")==0 || xx.compareToIgnoreCase("0")==0)
+		{
+			if(newNum>0)
+			{       
+				int rem=0,j;
+				int[] a= new int[20];
+			  	while(newNum>0)
+			  	{
+					a[rem]=newNum%8;
+					newNum=newNum/8;
+					rem++;
+				}
+				for(j=rem-1 ; j>=0; j--)
+				{
+					answer=answer+a[j];
+				}
+			}
+			else
+			{
+				System.out.println("Invalid");
+			}
+			return "0"+answer;
+		}
+		else if(xx.compareToIgnoreCase("d")==0 || xx.compareToIgnoreCase("decimal")==0)
+		{
+			answer=String.valueOf(newNum);
+			return answer;
+		}
+		else
+		{
+			System.out.println("Invalid conversion");
+	        }
+	}
+_____________________________________________________________________________________________________________________________
+
+       //BINARY CONVERSION
+       
+       String toxxSystem(String num,String xx)
+       {
+		if(num.startsWith("0b")==true)
+	 	{
+	 	        num=num.substring(2);
+	 	}
+	 	else
+	 	{
+	 	        System.out.println("invalid number");
+	 	}
+	 	Integer newNum=Integer.parseInt(num);
+	 	
+	 	//binary to decimal
+	 	if(xx.compareToIgnoreCase("d")==0)
+	 	{
+	 		if(newNum>0)
+	 		{
+	 			int rem=0,i=0;
+	 			double decimal=0;
+	 			while(newNum>0)
+	 			{
+	 				rem=newNum%10;
+	 				newNum=newNum/10;
+	 				decimal=decimal+rem*Math.pow(2,i++);
+	 			}
+	 	                return Integer.toString((int)decimal);
+	 	         }
+	 	         else
+	 	         {
+	 	         	System.out.println("invalid");
+	 	         }
+		}
+		
+		//binary to octal
+		else if(xx.compareToIgnoreCase("o")==0)
+		{
+	 		if(newNum>0)
+	 		{
+	 			int rem=0,i=0, octal=1;
+	 			int answer=0;
+	 			double decimal=0;
+	 			
+	 			//binary to decimal
+	 			while(newNum>0)
+	 			{
+	 				rem=newNum%10;
+	 				newNum=newNum/10;
+	 				decimal=decimal+rem*Math.pow(2,i++);
+	 			}
+	 			
+	 			//decimal to octal
+	 			while(decimal>0)
+	 			{			
+	 				rem=decimal%8;
+	 				decimal=decimal/8;
+	 				octal=rem+(octal*10);
+	 			}
+	 			while(octal>1)
+	 			{
+	 				rem=octal%10;
+	 				octal=octal/10;
+	 				answer=rem+(answer*10);
+	 			}		
+	 	                return Integer.toString(answer);
+	 	         }
+	 	         else
+	 	         {
+	 	         	System.out.println("invalid");
+	 	         }
+	 	  }
+	 	  else 
+	 	  {
+	 	  	System.out.println("invalid");
+	 	  	return -1;
+	 	}
+	 	
+	 	//binary to binary
+	 	else if(xx.compareToIgnoreCase("b")==0 )
+                {
+                	String answer=String.valueOf(newNum);
+			return answer;
+		}
+		else
+		{
+			System.out.println("Invalid conversion");
+		}
+	}
+	
+_______________________________________________________________________________________________________________________
+
+  //OCTAL CONVERSION
+
+       String toxxSystem(String num,String xx)
+       {
+		if(num.startsWith("0")==true)
+	 	{
+	 	        num=num.substring(1);
+	 	}
+	 	else
+	 	{
+	 	        System.out.println("invalid number");
+	 	}
+	 	Integer newNum=Integer.parseInt(num);
+	 	
+	 	//octal to decimal
+	 	if(xx.compareToIgnoreCase("d")==0)
+	 	{
+	 		if(newNum>0)
+	 		{
+	 			int rem=0,i=0;
+	 			double decimal=0;
+	 			while(newNum>0)
+	 			{
+	 				rem=newNum%10;
+	 				newNum=newNum/10;
+	 				decimal=decimal+rem*Math.pow(8,i++);
+	 			}
+	 	                return Integer.toString((int)decimal);
+	 	         }
+	 	         else
+	 	         {
+	 	         	System.out.println("invalid");
+	 	         }
+		}
+		
+		//octal to binary
+		
+		else if(xx.compareToIgnoreCase("b")==0 || xx.compareToIgnoreCase("0b")==0)
+		{
+			if(newNum>0)
+	 		{
+	 			int rem=0,i=0, binary=1;
+	 			int answer=0;
+	 			double decimal=0;
+	 			
+	 			//octal to decimal
+	 			while(newNum>0)
+	 			{
+	 				rem=newNum%10;
+	 				newNum=newNum/10;
+	 				decimal=decimal+rem*Math.pow(8,i++);
+	 			}
+	 			//decimal to binary
+	 			while(decimal>0)
+	 			{
+	 				rem=decimal%2;
+	 				decimal=decimal/2;
+	 				binary=rem+(decimal*10);
+	 			}
+	 			while(binary>1)
+	 			{
+	 				rem=binary%10;
+	 				binary=octal/10;
+	 				answer=rem+(answer*10);
+	 			}
+	 			 return Integer.toString(answer);
+	 	         }
+	 	         else
+	 	         {
+	 	         	System.out.println("invalid");
+	 	         }
+	 	  }
+	 	  else 
+	 	  {
+	 	  	System.out.println("invalid");
+	 	  	return -1;
+	 	}
+	 	
+	 	//octal to octal
+	 	else if(xx.compareToIgnoreCase("0")==0 )
+                {
+                	String answer=String.valueOf(newNum);
+			return answer;
+		}
+		else
+		{
+			System.out.println("Invalid conversion");
+		}
+	}
+
+________________________________________________________________________________________________________________
